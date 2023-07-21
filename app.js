@@ -59,7 +59,7 @@ passport.use(
         {
             clientID: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/google/success",
+            callbackURL: "https://login-page-c3m9.onrender.com/auth/google/success",
             userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
         },
         function (accessToken, refreshToken, profile, cb) {
@@ -76,7 +76,7 @@ passport.use(
         {
             clientID: process.env.APP_ID,
             clientSecret: process.env.APP_SECRET,
-            callbackURL: "http://localhost:3000/auth/facebook/success",
+            callbackURL: "https://login-page-c3m9.onrender.com/auth/facebook/success",
         },
         function (accessToken, refreshToken, profile, cb) {
             console.log(profile);
