@@ -1,0 +1,59 @@
+<%- include('partials/header'); -%>
+
+<div class="form">
+    <div>
+        <header><%= title %></header>
+        <form action="<%= link %>" method="post" onsubmit="return validateForm()">
+            <div class="field">
+                <input type="email" name="username" placeholder="Email" />
+            </div>
+            <p id="userError" class="error"></p>
+        <% if(title=="Login"){ %>
+            <div class="field">
+                <input type="password" name="password" class="pass" placeholder="Password" />
+                <i class="fa-solid fa-eye-slash eye-icon"></i>
+            </div>
+            <p id="passError" class="error"></p>
+        <% } else{ %>
+            <div class="field">
+                <input type="password" name="password" class="pass" placeholder="Create Password" />
+                <!-- <i class="fa-solid fa-eye-slash eye-icon"></i> -->
+            </div>
+            <p id="passError" class="error"></p>
+            <div class="field">
+                <input
+                    type="password"
+                    name="confirmPassword"
+                    class="pass"
+                    placeholder="Confirm Password" />
+                <i class="fa-solid fa-eye-slash eye-icon"></i>
+            </div>
+            <p id="cPassError" class="error"></p>
+        <% } %>
+            <div class="field">
+                <button type="submit" class="btn btn-primary"><%= title %></button>
+            </div>
+        </form>
+        <div class="form-link">
+            <span>
+                <%= word %> have an account?
+                <a href="/<%= oppoLink %>"><%= oppoTitle %></a>
+            </span>
+        </div>
+    </div>
+    <div class="line"></div>
+    <div class="media-option">
+        <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
+            <i class="fab fa-google"></i>
+            <%= title %> with Google
+        </a>
+    </div>
+    <div class="media-option">
+        <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button">
+            <i class="fab fa-facebook"></i>
+            <%= title %> with Facebook
+        </a>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>
