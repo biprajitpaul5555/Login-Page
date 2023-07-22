@@ -91,6 +91,7 @@ const sHeading = "Congratulations!";
 const sPara = "You are successfully logged in.";
 const fHeading = "Oops, Something went wrong!";
 const fPara = "The email and password you entered did not match our records. Please double-check and try again.";
+const dupPara = "This email id is already registered. Please try again with a new email id.";
 
 app.get("/", (req, res) => {
     res.render("home", { title: "Login", oppoTitle: "Signup", word: "Don't", link: "", oppoLink: "signup" });
@@ -130,7 +131,7 @@ app.post("/signup", function (req, res) {
     User.register({ username: req.body.username }, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
-            res.redirect("/signup");
+            res.render("message", { title: "Failure", heading: fHeading, para: dupPara });
         } else {
             passport.authenticate("local")(req, res, function () {
                 res.redirect("/success");
