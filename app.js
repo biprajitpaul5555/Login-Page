@@ -107,7 +107,7 @@ app.get("/failure", (req, res) => {
 });
 app.get("/success", (req, res) => {
     if (req.isAuthenticated())
-        res.render("message", { title: "Success", heading: sHeading, para: sPara, userInfo: req.user._id });
+        res.render("message", { title: "Success", heading: sHeading, para: sPara, userInfo: req.user.username });
     else res.redirect("/");
 });
 
@@ -133,7 +133,7 @@ app.get(
 
 app.post("/success", async (req, res) => {
     try {
-        await User.findOneAndDelete({ _id: req.body.userId });
+        await User.findOneAndDelete({ username: req.body.userName });
         res.render("message", { title: "Failure", heading: delHeading, para: delPara });
     } catch (err) {
         res.render("message", { title: "Success", heading: fHeading, para: fDelPara });
