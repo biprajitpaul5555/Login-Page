@@ -92,6 +92,9 @@ const sPara = "You are successfully logged in.";
 const fHeading = "Oops, Something went wrong!";
 const fPara = "The email and password you entered did not match our records. Please double-check and try again.";
 const dupPara = "This email id is already registered. Please try again with a new email id.";
+const delHeading = "Sorry to see you go :(";
+const delPara = "Your account was deleted successfully";
+const fDelPara = "Your account wasn't deleted successfully";
 
 app.get("/", (req, res) => {
     res.render("home", { title: "Login", oppoTitle: "Signup", word: "Don't", link: "", oppoLink: "signup" });
@@ -103,7 +106,8 @@ app.get("/failure", (req, res) => {
     res.render("message", { title: "Failure", heading: fHeading, para: fPara });
 });
 app.get("/success", (req, res) => {
-    if (req.isAuthenticated()) res.render("message", { title: "Success", heading: sHeading, para: sPara });
+    if (req.isAuthenticated())
+        res.render("message", { title: "Success", heading: sHeading, para: sPara, userInfo: req.user.username });
     else res.redirect("/");
 });
 
@@ -126,6 +130,15 @@ app.get(
         res.redirect("/success");
     }
 );
+
+app.post("/success", async (req, res) => {
+    try {
+        await User.findOneAndDelete({ username: req.body.userName });
+        res.render("message", { title: "Failure", heading: delHeading, para: delPara });
+    } catch (err) {
+        res.render("message", { title: "Success", heading: fHeading, para: fDelPara });
+    }
+});
 
 app.post("/signup", function (req, res) {
     User.register({ username: req.body.username }, req.body.password, function (err, user) {
