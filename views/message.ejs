@@ -9,7 +9,7 @@
         <% if(title=="Success"){ %>
             <a class="btn btn-dark btn-lg" href="/logout" role="button">Log Out</a>
             <form action="/success" method="post">
-                <button type="submit" class="btn btn-dark btn-lg" name="userName" value="<%= userInfo %>">Delete account</button>
+                <button type="submit" class="btn btn-dark btn-lg" name="userId" value="<%= userInfo %>">Delete account</button>
             </form>
         <% } else{ %>
             <a class="btn btn-dark btn-lg" href="/" role="button">Log In</a>
